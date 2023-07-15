@@ -1,4 +1,4 @@
-﻿public class FastRunningState : RunningState
+﻿public class FastRunningState : BaseRunningState
 {
     public FastRunningState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character) { }
 
@@ -7,6 +7,15 @@
         base.Enter();
 
         Data.Speed = Config.FastSpeed;
-        Config.SetCurrentSpeed(Data.Speed);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (IsShiftDown)
+            return;
+
+        StateSwitcher.SwitchState<RunningState>();
     }
 }

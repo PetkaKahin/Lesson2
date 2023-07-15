@@ -3,7 +3,7 @@ using UnityEngine;
 public class AirborneState : MovementState
 {
     private AirborneStateConfig _airborneStateConfig;
-    private RunningStateConfig _runningStateConfig;
+    private MovementStateConfig _runningStateConfig;
 
     public AirborneState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
     {

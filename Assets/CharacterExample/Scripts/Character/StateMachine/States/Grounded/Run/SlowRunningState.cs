@@ -1,4 +1,4 @@
-﻿public class SlowRunningState : RunningState
+﻿public class SlowRunningState : BaseRunningState
 {
     public SlowRunningState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character) { }
 
@@ -7,6 +7,15 @@
         base.Enter();
 
         Data.Speed = Config.SlowSpeed;
-        Config.SetCurrentSpeed(Data.Speed);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (IsCtrlDown)
+            return;
+
+        StateSwitcher.SwitchState<RunningState>();
     }
 }
