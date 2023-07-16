@@ -7,6 +7,9 @@
     public BaseRunningState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
         => Config = character.Config.RunningStateConfig;
 
+    public bool IsShiftDown => Input.Movement.FastRun.ReadValue<float>() == KeyDown;
+    public bool IsCtrlDown => Input.Movement.SlowRun.ReadValue<float>() == KeyDown;
+
     public override void Enter()
     {
         base.Enter();
@@ -28,7 +31,4 @@
         if (IsHorizonatalInputZero())
             StateSwitcher.SwitchState<IdlingState>();
     }
-
-    public bool IsShiftDown => Input.Movement.FastRun.ReadValue<float>() == KeyDown;
-    public bool IsCtrlDown => Input.Movement.SlowRun.ReadValue<float>() == KeyDown;
 }
